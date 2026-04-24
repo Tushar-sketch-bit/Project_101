@@ -34,14 +34,9 @@ class EDA:
          if pd.api.types.is_numeric_dtype(self.df[col_name]):
              
           stats.trim_mean(self.df[col_name],prop_float)
-            
-                 
-         
-             
-     
-     
-     
-     
+         else:
+            print(f"Column '{col_name}' is not numeric.")
+                
      def na_values_in_each(self, COLS:list=[]):
          numeric_df=self.df.select_dtypes(include=[np.number])
          null_counts=numeric_df.isnull().sum()
