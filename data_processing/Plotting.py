@@ -2,6 +2,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import streamlit as st
 
 
 class Plotters:
@@ -16,18 +17,20 @@ class Plotters:
         """
         if self.plot_func is None:
          raise NotImplementedError("Subclasses must define self.plot_func")
+        
+        fig, ax = plt.subplots()
 
         if col2 is None:
             
-            self.plot_func(data=self.data, x=col1, **kwargs)
-            title = f"Distribution of {col1}"
+            self.plot_func(data=self.data, x=col1,ax=ax, **kwargs)
+            ax.set_title= f"Distribution of {col1}"
         else:
             # Logic for 2D plots (Bar/Scatter)
-            self.plot_func(data=self.data, x=col1, y=col2, **kwargs)
-            title = f"{col1} vs {col2}"
+            self.plot_func(data=self.data, x=col1, y=col2,ax=ax, **kwargs)
+            ax.set_title = f"{col1} vs {col2}"
 
-        plt.title(f"{self.__class__.__name__}: {title}")
-        plt.show()
+        st.pyplot(fig)       
+        plt.close(fig)  
 
 
 
