@@ -6,13 +6,14 @@ from eda_methods import EDA
 
 
 
-class CLEANING:EDA
-COL_GIVEN:str=None
+class CLEANING(EDA):
+    
+ COL_GIVEN:str=None
 
-def __init__(self, df: pd.DataFrame, **kwargs):
+ def __init__(self, df: pd.DataFrame, **kwargs):
       super().__init__(df,**kwargs)
         
-def _clean_col_by_mean(self,col_name=COL_GIVEN):
+ def _clean_col_by_mean(self,col_name=COL_GIVEN):
         try:
          if pd.api.types.is_numeric_dtype(self.df[col_name]):
           self.df[col_name].fillna(self.df[col_name].mean())
@@ -20,7 +21,7 @@ def _clean_col_by_mean(self,col_name=COL_GIVEN):
         except Exception:
            print("there was an error cleaning data")  
        
-def _clean_col_by_mode(self,col_name=COL_GIVEN):
+ def _clean_col_by_mode(self,col_name=COL_GIVEN):
         try:
          if pd.api.types.is_numeric_dtype(self.df[col_name]):
            self.df[col_name].fillna(self.df[col_name].mode())
@@ -29,7 +30,7 @@ def _clean_col_by_mode(self,col_name=COL_GIVEN):
            print("there was an error cleaning data")  
 
 
-def _clean_col_by_median(self,col_name=COL_GIVEN):
+ def _clean_col_by_median(self,col_name=COL_GIVEN):
     try:
         if pd.api.types.is_numeric_dtype(self.df[col_name]):
          self.df[col_name].fillna(self.df[col_name].median())
@@ -37,8 +38,7 @@ def _clean_col_by_median(self,col_name=COL_GIVEN):
     except Exception:
         print("error in cleaning data")
     
-
-def clean_col_by(self, col,**kwargs):
+ def clean_col_by(self, col,**kwargs):
         """A parent method that uses dynamic way to clean whole data
         """
 
