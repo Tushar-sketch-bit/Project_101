@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 
+
 class DataProcessor(ABC):
     def __init__(self, df: pd.DataFrame):
         self.df = df
@@ -10,20 +11,15 @@ class DataProcessor(ABC):
         """Every child must implement a run method."""
         pass
 
-    @abstractmethod    
-    def save_state(self, filename):
-        """Common logic shared by all processors."""
-        self.df.to_csv(filename)
+    def save_state(self, filename: str) -> None:
+        """Save the current dataframe state to a CSV file."""
+        self.df.to_csv(filename, index=False)
         print(f"Progress saved to {filename}")
 
-
-    def user_params(dict:dict)->list:
-        List=[]
-        for key, value in dict:
-          if List.__contains__(value):
-            pass
-          else:
-            List.append(value)
-        
-        return List
-
+    @staticmethod
+    def user_params(params: dict) -> list:
+        unique_values = []
+        for value in params.values():
+            if value not in unique_values:
+                unique_values.append(value)
+        return unique_values
